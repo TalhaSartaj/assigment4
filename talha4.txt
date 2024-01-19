@@ -1,0 +1,53 @@
+*** Test Cases ***
+User Registration
+    [Documentation]  Test the registration functionality of the bookstore app.
+    Open Browser  ${BASE URL}
+    Input Text  id=username  testuser
+    Input Text  id=password  testpassword
+    Click Button  id=register-btn
+    Page Should Contain  Welcome, testuser!
+    Close Browser
+*** Test Cases ***
+User Login
+    [Documentation]  Test the login functionality of the bookstore app.
+    Open Browser  ${BASE URL}
+    Input Text  id=username  testuser
+    Input Text  id=password  testpassword
+    Click Button  id=login-btn
+    Page Should Contain  Welcome back, testuser!
+    Close Browser
+*** Test Cases ***
+CRUD Operations
+    [Documentation]  Test CRUD operations on books in the bookstore app.
+    Open Browser  ${BASE URL}
+    
+    # Add a new book
+    Input Text  id=title  New Book Title
+    Input Text  id=author  New Book Author
+    Click Button  id=add-book-btn
+    Page Should Contain  New Book Title
+    Page Should Contain  New Book Author
+    
+    # Edit an existing book
+    Click Link  New Book Title
+    Input Text  id=edit-title  Updated Book Title
+    Input Text  id=edit-author  Updated Book Author
+    Click Button  id=update-book-btn
+    Page Should Contain  Updated Book Title
+    Page Should Contain  Updated Book Author
+    
+    # Delete the book
+    Click Button  id=delete-book-btn
+    Page Should Not Contain  Updated Book Title
+    Page Should Not Contain  Updated Book Author
+    
+    Close Browser
+*** Test Cases ***
+Book Search
+    [Documentation]  Test the book search functionality of the bookstore app.
+    Open Browser  ${BASE URL}
+    Input Text  id=search-input  Harry Potter
+    Click Button  id=search-btn
+    Page Should Contain  Harry Potter and the
+    Page Should Contain  J.K. Rowling
+    Close Browser
